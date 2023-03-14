@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+let playerScore = 0;
+let computerScore = 0;
+let round = 1;
+
+function playRound(playerSelection, computerSelection) {
+  if (playerSelection === computerSelection) {
+    return `Round ${round}: It's a tie! You both chose ${playerSelection}.`;
+  } else if (
+    (playerSelection === 'rock' && computerSelection === 'scissors') ||
+    (playerSelection === 'paper' && computerSelection === 'rock') ||
+    (playerSelection === 'scissors' && computerSelection === 'paper')
+  ) {
+    playerScore++;
+    return `Round ${round}: You win! You chose ${playerSelection} and computer chose ${computerSelection}.`;
+  } else {
+    computerScore++;
+    return `Round ${round}: You lose! Computer chose ${computerSelection} and you chose ${playerSelection}.`;
+  }
+}
+
+function computerPlay() {
+  const choices = ['rock', 'paper', 'scissors'];
+  const randomIndex = Math.floor(Math.random() * 3);
+  return choices[randomIndex];
+}
+
+function game() {
+  while (round <= 5) {
+    let playerSelection = prompt('Enter rock, paper, or scissors:');
+    playerSelection = playerSelection.toLowerCase();
+    if (!['rock', 'paper', 'scissors'].includes(playerSelection)) {
+      alert('Invalid input. Try again!');
+      continue;
+    }
+    const computerSelection = computerPlay();
+    console.log(playRound(playerSelection, computerSelection));
+    console.log(`Score: You ${playerScore} - ${computerScore} Computer`);
+    round++;
+  }
+  
+  if (playerScore > computerScore) {
+    console.log('You win the game!');
+  } else if (computerScore > playerScore) {
+    console.log('You lose the game!');
+  } else {
+    console.log("It's a tie game!");
+  }
+}
+
+game();
+
+
+    </script>
+</body>
+</html>

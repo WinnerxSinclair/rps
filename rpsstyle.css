@@ -1,0 +1,20 @@
+body {
+    background-color: white;
+    transition: background-color 0.5s ease;
+  }
+  
+  body.flash {
+    background-color: #00ff00;
+  }
+
+  body {
+    background-color: white;
+    transition: background-color 0.5s ease, background-image 0.5s ease;
+  }
+  
+  body.game-over {
+    background-image: url('lulw.png');
+    background-size: 100% 100%;
+    background-position: center center;
+  }
+  

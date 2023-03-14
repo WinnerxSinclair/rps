@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="rpsstyle.css">
 </head>
 <body>
     <div>
@@ -41,6 +42,15 @@ function computerPlay() {
   return choices[randomIndex];
 }
 
+const FLASH_DURATION = 500;
+
+function flashGreen() {
+  document.body.classList.add('flash');
+  setTimeout(() => {
+    document.body.classList.remove('flash');
+  }, FLASH_DURATION);
+}
+
 function game(playerSelection) {
   const computerSelection = computerPlay();
   const resultDiv = document.querySelector('#results');
@@ -52,6 +62,10 @@ function game(playerSelection) {
   scoreMessage.textContent = `Score: You ${playerScore} - ${computerScore} Computer`;
   resultDiv.appendChild(scoreMessage);
 
+  if (playerScore > computerScore) {
+    flashGreen();
+  }
+
   round++;
 
   if (round > 5) {
@@ -60,6 +74,7 @@ function game(playerSelection) {
       endMessage.textContent = 'You win the game!';
     } else if (computerScore > playerScore) {
       endMessage.textContent = 'You lose the game!';
+      document.body.classList.add('game-over');
     } else {
       endMessage.textContent = "It's a tie game!";
     }
@@ -69,6 +84,8 @@ function game(playerSelection) {
     document.querySelectorAll('button').forEach(button => (button.disabled = true));
   }
 }
+
+
 
 const rockBtn = document.querySelector('#rock-btn');
 rockBtn.addEventListener('click', () => game('rock'));
